@@ -1,0 +1,69 @@
+import webbrowser
+import os
+import speech_recognition as sr
+import pyttsx3
+
+def speak(text):
+    engine = pyttsx3.init()
+    engine.say(text)
+    engine.runAndWait()
+
+def open_url(url):
+    try:
+        webbrowser.open(url, new=2, autoraise=True)
+    except Exception as e:
+        speak(f"Error opening URL: {e}")
+
+def open_application(command):
+    try:
+        subprocess.run(command, shell=True, check=True)
+    except subprocess.CalledProcessError:
+        speak("Failed to open the application.")
+    except FileNotFoundError:
+        speak("Application not found.")
+
+speak("Welcome! Please tell me what you want to do.")
+speak("Enter the number or say the application name to open the corresponding application.")
+speak("Here are the available options:")
+print("1. Google Chrome")
+print("2. Notepad")
+print("3. Brave Browser")
+print("4. Paint")
+print("5. Microsoft Word")
+print("6. Microsoft Excel")
+print("7. File Explorer (Windows Explorer)")
+print("8. Calculator")
+
+r = sr.Recognizer()
+
+with sr.Microphone() as source:
+    print("Listening...")
+    audio = r.listen(source)
+
+try:
+    user_input = r.recognize_google(audio).lower()
+    print("User said:", user_input)
+
+    if "google chrome" in user_input:
+        os.system("start chrome")
+    elif "notepad" in user_input:
+        os.system("notepad")
+    elif "brave" in user_input:
+        os.system("start brave")
+    elif "paint" in user_input:
+        os.system("mspaint")
+    elif "microsoft word" in user_input or "word" in user_input:
+        os.system("start winword")
+    elif "microsoft excel" in user_input or "excel" in user_input:
+        os.system("start excel")
+    elif "file explorer" in user_input or "windows explorer" in user_input:
+        os.system("start explorer")
+    elif "calculator" in user_input:
+        os.system("calc")
+    else:
+        speak("Invalid choice. Please try again with a valid option.")
+except Exception as e:
+    print("Error:", e)
+    speak("Sorry, I couldn't understand. Please try again.")
+
+speak("Thank You")
