@@ -2,7 +2,7 @@
 Control ypur system through your own voice using python
 Welcome to the Voice-Controlled Application Launcher! This Python script allows you to open various applications using your voice commands. It utilizes the power of speech recognition and text-to-speech synthesis to create a hands-free experience.
 
-## Features
+# Features
 
 - Launch popular applications like Google Chrome, Notepad, Brave Browser, Paint, Microsoft Word, Microsoft Excel, File Explorer (Windows Explorer), and Calculator.
 - Provides an interactive voice-based interface.
